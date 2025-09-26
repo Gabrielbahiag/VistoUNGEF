@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Vistoria de Frota - UNGEF</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="manifest" href="manifest.json">
+    <script
+        src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado com sucesso:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Falha ao registrar Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <img src="assets/Brasao1.png" alt="Brasão GDF" class="logo">
+            <h2>GOVERNO DO DISTRITO FEDERAL</h2>
+            <p>SECRETARIA DE ESTADO DE ECONOMIA - SEEC</p>
+            <p>UNIDADE DE GESTÃO DE FROTA - UNGEF</p>
+            <h1>Checklist - UNGEF</h1>
+            <canvas id="brasaoCanvas" style="display: none;"></canvas>
+        </header>
+
+        <form id="checklistForm">
+            <fieldset class="form-section">
+                <legend>Tipo de Operação</legend>
+                <div class="radio-group-inline">
+                    <label><input type="radio" name="tipoOperacao" value="Entrega" required> Entrega</label>
+                    <label><input type="radio" name="tipoOperacao" value="Recebimento" required> Recebimento</label>
+                    <label><input type="radio" name="tipoOperacao" value="Vistoria" required> Vistoria</label>
+                </div>
+            </fieldset>
+
+            <div class="form-section grid-2-col">
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" class="uppercase-input">
+                </div>
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" class="uppercase-input">
+                </div>
+                <div class="form-group">
+                    <label for="placa">Placa:</label>
+                    <input type="text" id="placa" name="placa" class="uppercase-input">
+                </div>
+                <div class="form-group">
+                    <label for="orgao">Órgão:</label>
+                    <input type="text" id="orgao" name="orgao" class="uppercase-input">
+                </div>
+                <div class="form-group">
+                    <label for="odometro">Odômetro:</label>
+                    <input type="number" id="odometro" name="odometro">
+                </div>
+                <div class="form-group">
+                    <label for="dataHora">Data e Hora:</label>
+                    <input type="datetime-local" id="dataHora" name="dataHora">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="combustivel">Nível de combustível: <span id="fuelLevelLabel">1/2</span></label>
+                    <input type="range" id="combustivel" name="combustivel" min="0" max="1" step="0.05" value="0.5">
+                </div>
+            </div>
+
+            <div class="form-section grid-2-col">
+                <fieldset>
+                    <legend>Pneus Dianteiros</legend>
+                    <div class="radio-group-inline">
+                        <label><input type="radio" name="pneusDianteiros" value="Novo"> Novo</label>
+                        <label><input type="radio" name="pneusDianteiros" value="Usado"> Usado</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Pneus Traseiros</legend>
+                    <div class="radio-group-inline">
+                        <label><input type="radio" name="pneusTraseiros" value="Novo"> Novo</label>
+                        <label><input type="radio" name="pneusTraseiros" value="Usado"> Usado</label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <fieldset class="form-section">
+                <legend>Itens de Vistoria</legend>
+                <div class="checklist-grid">
+                </div>
+            </fieldset>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="observacoes">Danos ou Avarias do Veículo / Observações:</label>
+                    <textarea id="observacoes" name="observacoes" rows="5" class="uppercase-input"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label>Fotos de Avarias (Opcional):</label>
+                <div class="form-group">
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple
+                        style="display: none;">
+                    <label for="imageUpload" class="upload-btn">Adicionar Foto</label>
+                    <div id="image-previews" class="image-previews-container"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="vistoriador">Vistoriador UNGEF:</label>
+                    <input type="text" id="vistoriador" name="vistoriador" class="uppercase-input">
+                </div>
+                <div class="signature-pad-wrapper">
+                    <canvas id="vistoriadorSignaturePad"></canvas>
+                    <button type="button" class="clear-signature-btn"
+                        data-target="vistoriadorSignaturePad">Limpar</button>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="condutor">Condutor (Matrícula/Lotação):</label>
+                    <input type="text" id="condutor" name="condutor" class="uppercase-input">
+                </div>
+                <div class="signature-pad-wrapper">
+                    <canvas id="condutorSignaturePad"></canvas>
+                    <button type="button" class="clear-signature-btn" data-target="condutorSignaturePad">Limpar</button>
+                </div>
+            </div>
+
+            <button type="submit">Gerar Checklist em PDF</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
