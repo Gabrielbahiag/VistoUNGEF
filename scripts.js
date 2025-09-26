@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const img = new Image();
-        img.crossOrigin = "Anonymous"; 
-        img.src = 'assets/Brasao2.png'; 
+        img.crossOrigin = "Anonymous";
+        img.src = 'assets/Brasao2.png';
 
         img.onload = function () {
             canvas.width = img.width;
@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
             canvas.height = canvas.offsetHeight * ratio;
             canvas.getContext("2d").scale(ratio, ratio);
 
-            // Se havia uma assinatura, desenha-a de volta
             if (data) {
                 signaturePad.fromData(data);
             } else {
@@ -167,26 +166,47 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.setFontSize(8);
         doc.text('GOVERNO DO DISTRITO FEDERAL', 105, y, { align: 'center' }); y += 4;
         doc.text('SECRETARIA DE ESTADO DE ECONOMIA - SEEC', 105, y, { align: 'center' }); y += 4;
-        doc.text('UNIDADE DE GESTÃO DE FROTA - UNGEF', 105, y, { align: 'center' }); y += 8;
+        doc.text('UNIDADE DE GESTÃO DE FROTA - UNGEF', 105, y, { align: 'center' }); y += 12;
         doc.setFontSize(14); doc.setFont('helvetica', 'bold');
-        doc.text('CHECKLIST DE VISTORIA', 105, y, { align: 'center' }); doc.setFont('helvetica', 'normal'); y += 10;
-
+        doc.text('Checklist - UNGEF', 105, y, { align: 'center' }); doc.setFont('helvetica', 'normal'); y += 10;
         doc.setFontSize(10);
-        doc.text(`TIPO DE OPERAÇÃO: ${getRadioValue('tipoOperacao').toUpperCase()}`, 15, y); y += 7;
-        doc.text(`MARCA: ${getValue('marca')}`, 15, y); doc.text(`MODELO: ${getValue('modelo')}`, 105, y); y += 7;
-        doc.text(`PLACA: ${getValue('placa')}`, 15, y); doc.text(`ÓRGÃO: ${getValue('orgao')}`, 105, y); y += 7;
+        doc.text(`TIPO DE OPERAÇÃO: ${getRadioValue('tipoOperacao').toUpperCase()}`, 105, y, { align: 'center' }); y += 12;
+
+        doc.setDrawColor(221, 221, 221);
+        doc.line(15, y, 195, y);
+        doc.setDrawColor(0, 0, 0);
+        y += 12;
+
+        doc.text(`MARCA: ${getValue('marca')}`, 15, y);
+        doc.text(`MODELO: ${getValue('modelo')}`, 115, y); y += 7;
+        doc.text(`PLACA: ${getValue('placa')}`, 15, y);
+        doc.text(`ÓRGÃO: ${getValue('orgao')}`, 115, y); y += 7;
         doc.text(`ODÔMETRO: ${getValue('odometro')} KM`, 15, y);
+
         const dateTimeValue = getValue('dataHora');
         let formattedDateTime = 'NÃO PREENCHIDO';
         if (dateTimeValue && dateTimeValue !== 'NÃO PREENCHIDO') {
             const date = new Date(dateTimeValue);
             formattedDateTime = date.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).replace(',', '');
         }
-        doc.text(`DATA E HORA: ${formattedDateTime}`, 105, y); y += 7;
+
+        doc.text(`DATA E HORA: ${formattedDateTime}`, 115, y); y += 7;
         doc.text(`NÍVEL DE COMBUSTÍVEL: ${fuelLevelLabel.textContent.toUpperCase()}`, 15, y); y += 10;
-        doc.setFont('helvetica', 'bold'); doc.text('PNEUS:', 15, y); doc.setFont('helvetica', 'normal'); y += 7;
-        doc.text(`DIANTEIROS: ${getRadioValue('pneusDianteiros').toUpperCase()}`, 20, y); doc.text(`TRASEIROS: ${getRadioValue('pneusTraseiros').toUpperCase()}`, 105, y); y += 10;
+        doc.setFont('helvetica', 'bold');
+        doc.text('PNEUS:', 15, y);
+        doc.setFont('helvetica', 'normal'); y += 7;
+        doc.text(`DIANTEIROS: ${getRadioValue('pneusDianteiros').toUpperCase()}`, 15, y);
+        doc.text(`TRASEIROS: ${getRadioValue('pneusTraseiros').toUpperCase()}`, 115, y); y += 7;
+
+        doc.setDrawColor(221, 221, 221);
+        doc.line(15, y, 195, y);
+        doc.setDrawColor(0, 0, 0);
+        y += 12;
+
         doc.setFont('helvetica', 'bold'); doc.text('ITENS DE VISTORIA:', 15, y); doc.setFont('helvetica', 'normal'); y += 7;
+        doc.setFont('helvetica', 'bold');
+        doc.setFont('helvetica', 'normal'); y += 7;
+
         let col = 0;
         checklistItems.forEach(item => {
             const itemSlug = item.toLowerCase().replace(/[\/ ]/g, '_'); const value = getRadioValue(itemSlug);
@@ -197,43 +217,78 @@ document.addEventListener('DOMContentLoaded', function () {
                 checkboxString = `[ ] Sim   [X] NAO`;
             } else { checkboxString = `[ ] Sim   [ ] NAO`; }
 
-            const xPos = col % 2 === 0 ? 20 : 105;
+            const xPos = col % 2 === 0 ? 15 : 115;
             if (col % 2 === 0 && col > 0) { y += 7; } if (y > 270) { doc.addPage(); y = 15; }
             doc.text(`${item.toUpperCase()}: ${checkboxString}`, xPos, y); col++;
-            
+
         });
         y = (col % 2 !== 0) ? y + 7 : y;
         if (y > 260) { doc.addPage(); y = 15; }
         y += 10;
-        doc.setFont('helvetica', 'bold'); doc.text('DANOS, AVARIAS E OBSERVAÇÕES:', 15, y); doc.setFont('helvetica', 'normal'); y += 5;
+
+        doc.setDrawColor(221, 221, 221);
+        doc.line(15, y, 195, y);
+        doc.setDrawColor(0, 0, 0);
+        y += 12;
+
+        doc.setFont('helvetica', 'bold'); doc.text('DANOS, AVARIAS E OBSERVAÇÕES:', 15, y);
+        doc.setFont('helvetica', 'normal'); y += 5;
         const obsText = doc.splitTextToSize(getValue('observacoes'), 180);
         doc.text(obsText, 15, y); y += obsText.length * 5 + 10;
+
         if (uploadedImagesData.length > 0) {
-            doc.setFont('helvetica', 'bold'); doc.text('FOTOS DE AVARIAS:', 15, y); doc.setFont('helvetica', 'normal'); y += 7;
-            for (const img of uploadedImagesData) {
-                if (y > 220) { doc.addPage(); y = 15; }
-                doc.addImage(img.data, 'JPEG', 15, y, 80, 60); y += 65;
+            doc.setFont('helvetica', 'bold');
+            doc.text('FOTOS DE AVARIAS:', 15, y);
+            doc.setFont('helvetica', 'normal'); y += 7;
+
+            let imageX = 15;
+            let imageY = y;
+
+            for (let i = 0; i < uploadedImagesData.length; i++) {
+                const img = uploadedImagesData[i];
+                if (imageY > 220) {
+                    doc.addPage();
+                    imageY = 15; 
+                }
+                doc.addImage(img.data, 'JPEG', imageX, imageY, 80, 60);
+                if (i % 2 === 0) {
+                    imageX = 105; 
+                } else {
+                    imageX = 15; 
+                    imageY += 65; 
+                }
+            }
+            y = imageY;
+            if (uploadedImagesData.length % 2 !== 0) {
+                y += 65;
             }
         }
 
         const vistoriadorPad = signaturePads['vistoriadorSignaturePad'];
         const condutorPad = signaturePads['condutorSignaturePad'];
+
         if (y > 200) { doc.addPage(); y = 15; }
+
+        doc.setDrawColor(221, 221, 221);
+        doc.line(15, y, 195, y);
+        doc.setDrawColor(0, 0, 0);
+        y += 12;
+
         doc.setFontSize(10);
-        doc.text(`VISTORIADOR UNGEF: ${getValue('vistoriador')}`, 15, y);
+        const signatureY = y;
+        doc.text(`VISTORIADOR UNGEF: ${getValue('vistoriador')}`, 15, signatureY);
         if (!vistoriadorPad.isEmpty()) {
             const signatureImage = vistoriadorPad.toDataURL('image/png');
-            doc.addImage(signatureImage, 'PNG', 15, y + 2, 60, 20);
+            doc.addImage(signatureImage, 'PNG', 15, signatureY + 2, 60, 20);
         }
-        doc.text('___________________________________', 15, y + 25);
-        y += 40;
-        if (y > 250) { doc.addPage(); y = 15; }
-        doc.text(`CONDUTOR: ${getValue('condutor')}`, 15, y);
+        doc.text('________________________________', 15, signatureY + 25);
+        doc.text(`CONDUTOR: ${getValue('condutor')}`, 115, signatureY);
         if (!condutorPad.isEmpty()) {
             const signatureImage = condutorPad.toDataURL('image/png');
-            doc.addImage(signatureImage, 'PNG', 15, y + 2, 60, 20);
+            doc.addImage(signatureImage, 'PNG', 115, signatureY + 2, 60, 20);
         }
-        doc.text('___________________________________', 15, y + 25);
+        doc.text('________________________________', 115, signatureY + 25);
+        y = signatureY + 40;
 
         const today = new Date();
         doc.setFontSize(10);
