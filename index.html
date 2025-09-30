@@ -60,10 +60,112 @@
                     <label for="placa">Placa:</label>
                     <input type="text" id="placa" name="placa" class="uppercase-input">
                 </div>
+
                 <div class="form-group">
-                    <label for="orgao">Órgão:</label>
-                    <input type="text" id="orgao" name="orgao" class="uppercase-input">
+                    <label for="orgao-select">Órgão:</label>
+                    <div class="select-wrapper">
+                        <select id="orgao-select" name="orgao-select" class="uppercase-input">
+                            <option value="">Selecione...</option>
+                            <option value="AGEFIS">AGEFIS</option>
+                            <option value="ARPDF">ARPDF</option>
+                            <option value="CAESB">CAESB</option>
+                            <option value="CEB">CEB</option>
+                            <option value="CMDF">CMDF</option>
+                            <option value="CODHAB">CODHAB</option>
+                            <option value="DER">DER</option>
+                            <option value="DF LEGAL">DF LEGAL</option>
+                            <option value="DPDF">DPDF</option>
+                            <option value="EMATER">EMATER</option>
+                            <option value="FAPDF">FAPDF</option>
+                            <option value="FJZB">FJZB</option>
+                            <option value="FUNAP">FUNAP</option>
+                            <option value="IBRAM">IBRAM</option>
+                            <option value="IDEP">IDEP</option>
+                            <option value="IPEDF">IPEDF</option>
+                            <option value="IPREV-DF">IPREV-DF</option>
+                            <option value="JBB">JBB</option>
+                            <option value="NOVACAP">NOVACAP</option>
+                            <option value="PGDF">PGDF</option>
+                            <option value="PROCON">PROCON</option>
+                            <option value="SEAGRI-DF">SEAGRI-DF</option>
+                            <option value="RA-I ADM. REG. DO PLANO PILOTO">RA-I ADM. REG. DO PLANO PILOTO</option>
+                            <option value="RA-II ADM. REG. DO GAMA">RA-II ADM. REG. DO GAMA</option>
+                            <option value="RA-III ADM. REG. DE TAGUATINGA">RA-III ADM. REG. DE TAGUATINGA</option>
+                            <option value="RA-IV ADM. REG. DE BRAZLANDIA">RA-IV ADM. REG. DE BRAZLANDIA</option>
+                            <option value="RA-V ADM. REG. SOBRADINHO">RA-V ADM. REG. SOBRADINHO</option>
+                            <option value="RA-VI ADM. REG. DE PLANALTINA">RA-VI ADM. REG. DE PLANALTINA</option>
+                            <option value="RA-VII ADM. REG. DO PARANOA">RA-VII ADM. REG. DO PARANOA</option>
+                            <option value="RA-VIII ADM. REG. NUCLEO BANDEIRANTE">RA-VIII ADM. REG. NUCLEO BANDEIRANTE
+                            </option>
+                            <option value="RA-IX ADM. REG. DE CEILANDIA">RA-IX ADM. REG. DE CEILANDIA</option>
+                            <option value="RA-X ADM. REG. DO GUARA">RA-X ADM. REG. DO GUARA</option>
+                            <option value="RA-XI ADM. REG. DO CRUZEIRO">RA-XI ADM. REG. DO CRUZEIRO</option>
+                            <option value="RA-XII ADM. REG. DE SAMAMBAIA">RA-XII ADM. REG. DE SAMAMBAIA</option>
+                            <option value="RA-XIII ADM. REG. DE SANTA MARIA">RA-XIII ADM. REG. DE SANTA MARIA</option>
+                            <option value="RA-XIV ADM. REG. DE SAO SEBASTIAO">RA-XIV ADM. REG. DE SAO SEBASTIAO</option>
+                            <option value="RA-XV ADM. REG. RECANTO DAS EMAS">RA-XV ADM. REG. RECANTO DAS EMAS</option>
+                            <option value="RA-XVI ADM. REG. DO LAGO SUL">RA-XVI ADM. REG. DO LAGO SUL</option>
+                            <option value="RA-XVII ADM. REG. RIACHO FUNDO I">RA-XVII ADM. REG. RIACHO FUNDO I</option>
+                            <option value="RA-XVIII ADM. REG. DO LAGO NORTE">RA-XVIII ADM. REG. DO LAGO NORTE</option>
+                            <option value="RA-XIX ADM. REG. DE CANDANGOLANDIA">RA-XIX ADM. REG. DE CANDANGOLANDIA
+                            </option>
+                            <option value="RA-XX ADM. REG. DE AGUAS CLARAS">RA-XX ADM. REG. DE AGUAS CLARAS</option>
+                            <option value="RA-XXI ADM. REG. RIACHO FUNDO II">RA-XXI ADM. REG. RIACHO FUNDO II</option>
+                            <option value="RA-XXII ADM. REG. DO SUDOESTE/OCTOGONAL">RA-XXII ADM. REG. DO
+                                SUDOESTE/OCTOGONAL</option>
+                            <option value="RA-XXIII ADM. REG. DO VARJAO">RA-XXIII ADM. REG. DO VARJAO</option>
+                            <option value="RA-XXIV ADM. REG. DO PARK WAY">RA-XXIV ADM. REG. DO PARK WAY</option>
+                            <option value="RA-XXV ADM. REG. DO SCIA E ESTRUTURAL">RA-XXV ADM. REG. DO SCIA E ESTRUTURAL
+                            </option>
+                            <option value="RA-XXVI ADM. REG. DE SOBRADINHO II">RA-XXVI ADM. REG. DE SOBRADINHO II
+                            </option>
+                            <option value="RA-XXVII ADM. REG. DO JARDIM BOTANICO">RA-XXVII ADM. REG. DO JARDIM BOTANICO
+                            </option>
+                            <option value="RA-XXVIII ADM. REG. DO ITAPOA">RA-XXVIII ADM. REG. DO ITAPOA</option>
+                            <option value="RA-XXIX ADM. REG. DO SIA">RA-XXIX ADM. REG. DO SIA</option>
+                            <option value="RA-XXX ADM. REG. DE VICENTE PIRES">RA-XXX ADM. REG. DE VICENTE PIRES</option>
+                            <option value="RA-XXXI ADM. REG. DA FERCAL">RA-XXXI ADM. REG. DA FERCAL</option>
+                            <option value="RA-XXXII ADM. REG. SOL NASCENTE-POR DO SOL">RA-XXXII ADM. REG. SOL
+                                NASCENTE-POR DO SOL</option>
+                            <option value="RA-XXXIII ADM. REG. ARNIQUEIRAS">RA-XXXIII ADM. REG. ARNIQUEIRAS</option>
+                            <option value="RA-XXXIV ADM. REG. DE ARAPOANGA">RA-XXXIV ADM. REG. DE ARAPOANGA</option>
+                            <option value="RA-XXXV ADM. REG. AGUA QUENTE">RA-XXXV ADM. REG. AGUA QUENTE</option>
+                            <option value="SAB">SAB</option>
+                            <option value="SAE">SAE</option>
+                            <option value="SEAC">SEAC</option>
+                            <option value="SEAGRI">SEAGRI</option>
+                            <option value="SEAPE">SEAPE</option>
+                            <option value="SECEC">SECEC</option>
+                            <option value="SECOM">SECOM</option>
+                            <option value="SECTI">SECTI</option>
+                            <option value="SEDES">SEDES</option>
+                            <option value="SEDET">SEDET</option>
+                            <option value="SEDUH">SEDUH</option>
+                            <option value="SEE">SEE</option>
+                            <option value="SEEDE">SEEDE</option>
+                            <option value="SEEMT">SEEMT</option>
+                            <option value="SEF">SEF</option>
+                            <option value="SEGOV">SEGOV</option>
+                            <option value="SEJUS">SEJUS</option>
+                            <option value="SEL">SEL</option>
+                            <option value="SEMA">SEMA</option>
+                            <option value="SEMOB">SEMOB</option>
+                            <option value="SES">SES</option>
+                            <option value="SETIC">SETIC</option>
+                            <option value="SETUR">SETUR</option>
+                            <option value="SLU">SLU</option>
+                            <option value="SME">SME</option>
+                            <option value="SODF">SODF</option>
+                            <option value="SSP">SSP</option>
+                            <option value="TCDF">TCDF</option>
+                            <option value="TJDFT">TJDFT</option>
+                            <option value="outro">outro</option>
+                        </select>
+                    </div>
+                    <input type="text" id="orgao-outro" name="orgao-outro" class="uppercase-input outro-input"
+                        placeholder="Digite o nome do órgão" style="display: none;">
                 </div>
+
                 <div class="form-group">
                     <label for="odometro">Odômetro:</label>
                     <input type="number" id="odometro" name="odometro">
@@ -123,8 +225,17 @@
 
             <div class="form-section">
                 <div class="form-group">
-                    <label for="vistoriador">Vistoriador UNGEF:</label>
-                    <input type="text" id="vistoriador" name="vistoriador" class="uppercase-input">
+                    <label for="vistoriador-select">Vistoriador UNGEF:</label>
+                    <div class="select-wrapper">
+                        <select id="vistoriador-select" name="vistoriador-select" class="uppercase-input">
+                            <option value="">Selecione...</option>
+                            <option value="FRANCISCO">FRANCISCO</option>
+                            <option value="THIAGO">THIAGO</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <input type="text" id="vistoriador-outro" name="vistoriador-outro"
+                        class="uppercase-input outro-input" placeholder="Digite o nome aqui" style="display: none;">
                 </div>
                 <div class="signature-pad-wrapper">
                     <canvas id="vistoriadorSignaturePad"></canvas>

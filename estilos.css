@@ -100,6 +100,7 @@ textarea { resize: vertical; }
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 .radio-group-inline label {
     display: flex;
@@ -197,3 +198,32 @@ button:hover { background-color: #218838; }
 }
 
 .uppercase-input { text-transform: uppercase; }
+
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px !important;
+    background-color: white;
+}
+.select-wrapper {
+    position: relative;
+}
+.select-wrapper::after {
+    content: '▼';
+    font-size: 1rem;
+    color: #333;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.outro-input {
+    margin-top: 10px;
+}
