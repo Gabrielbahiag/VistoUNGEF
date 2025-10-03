@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="estilos.css">
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -22,6 +24,7 @@
         }
     </script>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -46,16 +49,25 @@
 
             <div class="form-section grid-2-col">
                 <div class="form-group">
-                    <label for="marca">Marca:</label>
-                    <input type="text" id="marca" name="marca" class="uppercase-input">
+                    <label for="marca-select">Marca:</label>
+                    <div class="select-wrapper">
+                        <select id="marca-select" name="marca" class="uppercase-input"></select>
+                    </div>
+                    <input type="text" id="marca-outro" name="marca-outro" class="uppercase-input outro-input"
+                        placeholder="Digite a marca aqui" style="display: none;">
                 </div>
                 <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" class="uppercase-input">
+                    <label for="modelo-select">Modelo:</label>
+                    <div class="select-wrapper">
+                        <select id="modelo-select" name="modelo" class="uppercase-input" disabled></select>
+                    </div>
+                    <input type="text" id="modelo-outro" name="modelo-outro" class="uppercase-input outro-input"
+                        placeholder="Digite o modelo" style="display: none;">
+
                 </div>
                 <div class="form-group">
                     <label for="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" class="uppercase-input">
+                    <input type="text" id="placa" name="placa" required minlength="7" maxlength="7" pattern=".{7,7}">
                 </div>
                 <div class="form-group">
                     <label for="orgao-select">Órgão:</label>
@@ -85,14 +97,15 @@
                             <option value="PGDF">PGDF</option>
                             <option value="PROCON">PROCON</option>
                             <option value="SEAGRI-DF">SEAGRI-DF</option>
-                            <option value="RA-I ADM. REG. DO PLANO PILOTO">RA-I ADM. REG. DO PLANO PILOTO</option>
+                            <option value="RA-I ADM. REG. DO PLANO PILOTO">RA-I ADM.REG. DO PLANO PILOTO</option>
                             <option value="RA-II ADM. REG. DO GAMA">RA-II ADM. REG. DO GAMA</option>
                             <option value="RA-III ADM. REG. DE TAGUATINGA">RA-III ADM. REG. DE TAGUATINGA</option>
                             <option value="RA-IV ADM. REG. DE BRAZLANDIA">RA-IV ADM. REG. DE BRAZLANDIA</option>
                             <option value="RA-V ADM. REG. SOBRADINHO">RA-V ADM. REG. SOBRADINHO</option>
                             <option value="RA-VI ADM. REG. DE PLANALTINA">RA-VI ADM. REG. DE PLANALTINA</option>
                             <option value="RA-VII ADM. REG. DO PARANOA">RA-VII ADM. REG. DO PARANOA</option>
-                            <option value="RA-VIII ADM. REG. NUCLEO BANDEIRANTE">RA-VIII ADM. REG. NUCLEO BANDEIRANTE</option>
+                            <option value="RA-VIII ADM. REG. NUCLEO BANDEIRANTE">RA-VIII ADM. REG. NUCLEO BANDEIRANTE
+                            </option>
                             <option value="RA-IX ADM. REG. DE CEILANDIA">RA-IX ADM. REG. DE CEILANDIA</option>
                             <option value="RA-X ADM. REG. DO GUARA">RA-X ADM. REG. DO GUARA</option>
                             <option value="RA-XI ADM. REG. DO CRUZEIRO">RA-XI ADM. REG. DO CRUZEIRO</option>
@@ -103,20 +116,26 @@
                             <option value="RA-XVI ADM. REG. DO LAGO SUL">RA-XVI ADM. REG. DO LAGO SUL</option>
                             <option value="RA-XVII ADM. REG. RIACHO FUNDO I">RA-XVII ADM. REG. RIACHO FUNDO I</option>
                             <option value="RA-XVIII ADM. REG. DO LAGO NORTE">RA-XVIII ADM. REG. DO LAGO NORTE</option>
-                            <option value="RA-XIX ADM. REG. DE CANDANGOLANDIA">RA-XIX ADM. REG. DE CANDANGOLANDIA</option>
+                            <option value="RA-XIX ADM. REG. DE CANDANGOLANDIA">RA-XIX ADM. REG. DE CANDANGOLANDIA
+                            </option>
                             <option value="RA-XX ADM. REG. DE AGUAS CLARAS">RA-XX ADM. REG. DE AGUAS CLARAS</option>
                             <option value="RA-XXI ADM. REG. RIACHO FUNDO II">RA-XXI ADM. REG. RIACHO FUNDO II</option>
-                            <option value="RA-XXII ADM. REG. DO SUDOESTE/OCTOGONAL">RA-XXII ADM. REG. DO SUDOESTE/OCTOGONAL</option>
+                            <option value="RA-XXII ADM. REG. DO SUDOESTE/OCTOGONAL">RA-XXII ADM. REG. DO
+                                SUDOESTE/OCTOGONAL</option>
                             <option value="RA-XXIII ADM. REG. DO VARJAO">RA-XXIII ADM. REG. DO VARJAO</option>
                             <option value="RA-XXIV ADM. REG. DO PARK WAY">RA-XXIV ADM. REG. DO PARK WAY</option>
-                            <option value="RA-XXV ADM. REG. DO SCIA E ESTRUTURAL">RA-XXV ADM. REG. DO SCIA E ESTRUTURAL</option>
-                            <option value="RA-XXVI ADM. REG. DE SOBRADINHO II">RA-XXVI ADM. REG. DE SOBRADINHO II</option>
-                            <option value="RA-XXVII ADM. REG. DO JARDIM BOTANICO">RA-XXVII ADM. REG. DO JARDIM BOTANICO</option>
+                            <option value="RA-XXV ADM. REG. DO SCIA E ESTRUTURAL">RA-XXV ADM. REG. DO SCIA E ESTRUTURAL
+                            </option>
+                            <option value="RA-XXVI ADM. REG. DE SOBRADINHO II">RA-XXVI ADM. REG. DE SOBRADINHO II
+                            </option>
+                            <option value="RA-XXVII ADM. REG. DO JARDIM BOTANICO">RA-XXVII ADM. REG. DO JARDIM BOTANICO
+                            </option>
                             <option value="RA-XXVIII ADM. REG. DO ITAPOA">RA-XXVIII ADM. REG. DO ITAPOA</option>
                             <option value="RA-XXIX ADM. REG. DO SIA">RA-XXIX ADM. REG. DO SIA</option>
                             <option value="RA-XXX ADM. REG. DE VICENTE PIRES">RA-XXX ADM. REG. DE VICENTE PIRES</option>
                             <option value="RA-XXXI ADM. REG. DA FERCAL">RA-XXXI ADM. REG. DA FERCAL</option>
-                            <option value="RA-XXXII ADM. REG. SOL NASCENTE/POR DO SOL">RA-XXXII ADM. REG. SOL NASCENTE/POR DO SOL</option>
+                            <option value="RA-XXXII ADM. REG. SOL NASCENTE/POR DO SOL">RA-XXXII ADM. REG. SOL
+                                NASCENTE/POR DO SOL</option>
                             <option value="RA-XXXIII ADM. REG. ARNIQUEIRAS">RA-XXXIII ADM. REG. ARNIQUEIRAS</option>
                             <option value="RA-XXXIV ADM. REG. DE ARAPOANGA">RA-XXXIV ADM. REG. DE ARAPOANGA</option>
                             <option value="RA-XXXV ADM. REG. AGUA QUENTE">RA-XXXV ADM. REG. AGUA QUENTE</option>
@@ -153,8 +172,8 @@
                             <option value="outro">outro</option>
                         </select>
                     </div>
-                    <input type="text" id="orgao-outro" name="orgao-outro" class="uppercase-input outro-input" 
-                           placeholder="Digite o nome do órgão" style="display: none;">
+                    <input type="text" id="orgao-outro" name="orgao-outro" class="uppercase-input outro-input"
+                        placeholder="Digite o nome do órgão" style="display: none;">
                 </div>
                 <div class="form-group">
                     <label for="odometro">Odômetro:</label>
@@ -182,9 +201,8 @@
 
                     <!-- Slider Aprimorado -->
                     <div class="fuel-slider-container">
-                        <input type="range" id="combustivel" name="combustivel" 
-                               min="0" max="100" step="1" value="50" 
-                               class="fuel-slider">
+                        <input type="range" id="combustivel" name="combustivel" min="0" max="100" step="1" value="50"
+                            class="fuel-slider">
                         <div class="fuel-markers">
                             <span>0%</span>
                             <span>25%</span>
@@ -201,7 +219,7 @@
 
                     <!-- Alerta de Combustível Baixo -->
                     <div id="fuelAlert" class="fuel-alert" style="display: none;">
-                        ⚠️ Atenção: Nível de combustível baixo!
+                        ⚠️ Atenção:combustível baixo!
                     </div>
                 </div>
             </div>
@@ -238,7 +256,8 @@
             <div class="form-section">
                 <label>Fotos de Avarias (Opcional):</label>
                 <div class="form-group">
-                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple style="display: none;">
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple
+                        style="display: none;">
                     <label for="imageUpload" class="upload-btn">Adicionar Foto</label>
                 </div>
                 <div id="image-previews" class="image-previews-container"></div>
@@ -256,12 +275,13 @@
                             <option value="outro">Outro</option>
                         </select>
                     </div>
-                    <input type="text" id="vistoriador-outro" name="vistoriador-outro" class="uppercase-input outro-input" 
-                           placeholder="Digite o nome aqui" style="display: none;">
+                    <input type="text" id="vistoriador-outro" name="vistoriador-outro"
+                        class="uppercase-input outro-input" placeholder="Digite o nome aqui" style="display: none;">
                 </div>
                 <div class="signature-pad-wrapper">
                     <canvas id="vistoriadorSignaturePad"></canvas>
-                    <button type="button" class="clear-signature-btn" data-target="vistoriadorSignaturePad">Limpar</button>
+                    <button type="button" class="clear-signature-btn"
+                        data-target="vistoriadorSignaturePad">Limpar</button>
                 </div>
             </div>
 
@@ -289,4 +309,5 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
     <script src="scripts.js"></script>
 </body>
+
 </html>

@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', function () {
         'ADESIVOS/PORTAS', 'DOCUMENTO ORIGINAL', 'CARTÃO DE ABASTECIMENTO'
     ];
 
+    const carModels = {
+        'Chevrolet': ['Montana', 'Spin', "Onix", 'S10'],
+        'Fiat': ['Strada', 'Fiorino'],
+        'Volkswagen': ['Polo', 'Saveiro'],
+        'nissan': ['Sentra', 'Frontier'],
+        'mitsubishi': ['L200'],
+    }
+
     let uploadedImagesData = [];
     const signaturePads = {};
 
@@ -14,11 +22,91 @@ document.addEventListener('DOMContentLoaded', function () {
         loadBrasaoToCanvas();
         setInitialDateTime();
         initializeChecklist();
-        initializeFuelSystem(); // Nova função para sistema de combustível
+        initializeFuelSystem();
         initializeImageUpload();
         initializeSignaturePads();
         initializeDynamicSelects();
         clearForm();
+        initializeMakeModelSelects();
+        validarPlaca();
+    }
+
+    function validarPlaca() {
+        const placaInput = document.getElementById("placa");
+        if (placaInput.value.length !== 7) {
+            placaInput.setCustomValidity("A placa deve ter exatamente 7 caracteres.");
+        } else {
+            placaInput.setCustomValidity("");
+        }
+    }
+    document.getElementById("placa").addEventListener("input", validarPlaca);
+
+
+    function initializeMakeModelSelects() {
+        const marcaSelect = document.getElementById('marca-select');
+        const marcaOutro = document.getElementById('marca-outro');
+        const modeloSelect = document.getElementById('modelo-select');
+        const modeloOutro = document.getElementById('modelo-outro');
+
+        // Popula a lista de Marcas e adiciona "Outro"
+        marcaSelect.innerHTML = '<option value="">Selecione a Marca...</option>';
+        for (const make of Object.keys(carModels)) {
+            const option = document.createElement('option');
+            option.value = make;
+            option.textContent = make;
+            marcaSelect.appendChild(option);
+        }
+        marcaSelect.innerHTML += '<option value="outro">Outro (Digitar)...</option>';
+
+        // Adiciona o "ouvinte" para quando a Marca for alterada
+        marcaSelect.addEventListener('change', () => {
+            const selectedMake = marcaSelect.value;
+
+            // Sempre reseta os campos de modelo ao trocar a marca
+            modeloSelect.innerHTML = '<option value="">Selecione o Modelo...</option>';
+            modeloOutro.style.display = 'none';
+            modeloOutro.value = '';
+            marcaOutro.style.display = 'none';
+            marcaOutro.value = '';
+
+            // Se o usuário escolher "Outro" para a marca...
+            if (selectedMake === 'outro') {
+                marcaOutro.style.display = 'block';
+                marcaOutro.focus();
+
+                // --- NOVA LÓGICA ---
+                // Ativa o select de modelo, define as opções apenas como "Outro" e o seleciona.
+                modeloSelect.disabled = false;
+                modeloSelect.innerHTML = '<option value="outro" selected>Outro (Digitar)...</option>';
+                // Dispara o evento de 'change' no modelo para que ele mostre seu próprio campo de texto.
+                modeloSelect.dispatchEvent(new Event('change'));
+
+            } else { // Se o usuário escolher uma marca da lista...
+                modeloSelect.disabled = true;
+
+                if (selectedMake && carModels[selectedMake]) {
+                    modeloSelect.disabled = false;
+                    carModels[selectedMake].forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        modeloSelect.appendChild(option);
+                    });
+                    modeloSelect.innerHTML += '<option value="outro">Outro</option>';
+                }
+            }
+        });
+
+        // Adiciona o "ouvinte" para quando o Modelo for alterado
+        modeloSelect.addEventListener('change', () => {
+            if (modeloSelect.value === 'outro') {
+                modeloOutro.style.display = 'block';
+                modeloOutro.focus();
+            } else {
+                modeloOutro.style.display = 'none';
+                modeloOutro.value = '';
+            }
+        });
     }
 
     function loadBrasaoToCanvas() {
@@ -191,8 +279,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 fuelAlert.style.display = 'block';
                 fuelAlert.style.backgroundColor = value <= 10 ? '#f8d7da' : '#fff3cd';
                 fuelAlert.style.color = value <= 10 ? '#721c24' : '#856404';
-                fuelAlert.innerHTML = value <= 10 ? 
-                    '🚨 CRÍTICO: Combustível na reserva!' : 
+                fuelAlert.innerHTML = value <= 10 ?
+                    '🚨 CRÍTICO: Combustível na reserva!' :
                     '⚠️ Atenção: Nível de combustível baixo!';
             } else {
                 fuelAlert.style.display = 'none';
@@ -200,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Event listener para o slider
-        fuelSlider.addEventListener('input', function() {
+        fuelSlider.addEventListener('input', function () {
             const value = parseInt(this.value);
             updateFuelDisplay(value);
         });
