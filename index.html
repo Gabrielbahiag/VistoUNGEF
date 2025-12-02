@@ -66,8 +66,21 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" required minlength="7" maxlength="7" pattern=".{7,7}">
+                    <div class="label-with-toggle">
+                        <label for="placa">Placa:</label>
+
+                        <div class="toggle-container">
+                            <span class="toggle-label"></span>
+                            <label class="switch">
+                                <input type="checkbox" id="tipoPlacaSwitch" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-label">MERCOSUL</span>
+                        </div>
+                    </div>
+                    <input type="text" id="placa" name="placa" required class="uppercase-input" placeholder=""
+                        maxlength="7">
+                    
                 </div>
                 <div class="form-group">
                     <label for="orgao-select">Órgão:</label>
@@ -185,12 +198,10 @@
                 </div>
             </div>
 
-            <!-- Seção de Combustível Melhorada -->
             <div class="form-section fuel-section">
                 <div class="fuel-container">
                     <label for="combustivel">Nível de Combustível</label>
 
-                    <!-- Gauge Visual -->
                     <div class="fuel-gauge-container">
                         <canvas id="fuelGaugeCanvas" width="200" height="120"></canvas>
                         <div class="fuel-info">
@@ -199,7 +210,6 @@
                         </div>
                     </div>
 
-                    <!-- Slider Aprimorado -->
                     <div class="fuel-slider-container">
                         <input type="range" id="combustivel" name="combustivel" min="0" max="100" step="1" value="50"
                             class="fuel-slider">
@@ -212,12 +222,10 @@
                         </div>
                     </div>
 
-                    <!-- Barra de Progresso -->
                     <div class="fuel-progress-bar">
                         <div id="fuelProgressFill" class="fuel-progress-fill"></div>
                     </div>
 
-                    <!-- Alerta de Combustível Baixo -->
                     <div id="fuelAlert" class="fuel-alert" style="display: none;">
                         ⚠️ Atenção:combustível baixo!
                     </div>
@@ -272,6 +280,7 @@
                             <option value="FRANCISCO">FRANCISCO</option>
                             <option value="THIAGO">THIAGO</option>
                             <option value="CLAUDIO">CLAUDIO</option>
+                            <option value="GOMES">GOMES</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
